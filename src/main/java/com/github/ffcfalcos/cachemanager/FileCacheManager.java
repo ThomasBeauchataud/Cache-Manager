@@ -2,7 +2,6 @@ package com.github.ffcfalcos.cachemanager;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Default;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -47,14 +46,9 @@ class FileCacheManager extends AbstractCacheManager {
     @Override
     public Serializable get(String key) {
         try {
-            File file = new File(directory + key);
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String st;
-            StringBuilder string = new StringBuilder();
-            while ((st = br.readLine()) != null) {
-                string.append(st);
-            }
-            return this.unSerialize(string.toString());
+            FileInputStream fileInputStream = new FileInputStream(directory + key);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            return (Serializable)objectInputStream.readObject();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -69,9 +63,9 @@ class FileCacheManager extends AbstractCacheManager {
     @Override
     public void add(String key, Serializable object) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(directory + key));
-            writer.write(this.serialize(object));
-            writer.close();
+            FileOutputStream fileOutputStream = new FileOutputStream(directory + key);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(object);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -3,7 +3,6 @@ package com.github.ffcfalcos.cachemanager;
 import redis.clients.jedis.Jedis;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Default;
 import java.io.Serializable;
 
 /**
@@ -13,7 +12,6 @@ import java.io.Serializable;
  * This class permit to manage a cache system with simple actions and to store it in a Redis server
  * All rules are executed in the CacheManager and with the CacheValidationSystem if used
  */
-@Default
 @ApplicationScoped
 class RedisCacheManager extends AbstractCacheManager {
 

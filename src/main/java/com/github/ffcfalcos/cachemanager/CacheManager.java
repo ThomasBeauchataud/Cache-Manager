@@ -117,7 +117,7 @@ class CacheManager implements CacheManagerInterface {
         Association association = this.getAssociationByKey(key);
         if(association != null) {
             CacheSystemInterface cacheSystem = this.getCacheSystem(association.getCacheSystem());
-            Serializable meta = cacheSystem.get("meta-" + key);
+            Serializable meta = cacheSystem.get("meta" + key);
             CacheValidationInterface cacheValidation = this.getCacheValidation(association.getValidationSystem());
             return cacheValidation.validate(meta);
         }
@@ -131,9 +131,9 @@ class CacheManager implements CacheManagerInterface {
      */
     @Override
     public void add(String key, Serializable object) {
-        redisCacheManager.add(key, object);
-        redisCacheManager.add("meta-" + key, "empty-meta");
-        associations.add(new Association(redisCacheManager.getClass().getName(), key, defaultCacheValidation.getClass().getName()));
+        fileCacheManager.add(key, object);
+        fileCacheManager.add("meta" + key, "empty-meta");
+        associations.add(new Association(fileCacheManager.getClass().getName(), key, defaultCacheValidation.getClass().getName()));
     }
 
     /**
@@ -144,9 +144,9 @@ class CacheManager implements CacheManagerInterface {
      */
     @Override
     public void add(String key, Serializable object, Serializable meta) {
-        redisCacheManager.add(key, object);
-        redisCacheManager.add("meta-" + key, meta);
-        associations.add(new Association(redisCacheManager.getClass().getName(), key, defaultCacheValidation.getClass().getName()));
+        fileCacheManager.add(key, object);
+        fileCacheManager.add("meta" + key, meta);
+        associations.add(new Association(fileCacheManager.getClass().getName(), key, defaultCacheValidation.getClass().getName()));
     }
 
     /**
@@ -167,10 +167,10 @@ class CacheManager implements CacheManagerInterface {
         association.setValidationSystem(cacheValidation.getClass().getName());
         if(this.getAssociationByKey(key) != null) {
             cacheSystem.remove(key);
-            cacheSystem.remove("meta-" + key);
+            cacheSystem.remove("meta" + key);
         }
         cacheSystem.add(key, object);
-        cacheSystem.add("meta-" + key, meta);
+        cacheSystem.add("meta" + key, meta);
     }
 
     /**
@@ -183,7 +183,7 @@ class CacheManager implements CacheManagerInterface {
         if(association != null) {
             CacheSystemInterface cacheSystem = this.getCacheSystem(association.getCacheSystem());
             cacheSystem.remove(key);
-            cacheSystem.remove("meta-" + key);
+            cacheSystem.remove("meta" + key);
         }
     }
 
@@ -198,7 +198,7 @@ class CacheManager implements CacheManagerInterface {
                 return cacheSystem;
             }
         }
-        return redisCacheManager;
+        return fileCacheManager;
     }
 
     /**
