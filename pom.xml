@@ -6,7 +6,7 @@
 
     <groupId>com.github.ffcfalcos</groupId>
     <artifactId>cache-manager</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
     <name>Cache Manager</name>
     <description>Cache Manager is a small component to manage cache with different storage system and different validation systems</description>

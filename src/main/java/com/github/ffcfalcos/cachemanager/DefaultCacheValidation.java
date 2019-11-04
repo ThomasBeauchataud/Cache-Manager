@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.0
+ * @version 1.0.1
  * This class permit to validate a content stored in cache with his meta data
  */
 @Default

@@ -11,7 +11,7 @@ import java.io.*;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.0
+ * @version 1.0.1
  * This class permit to manage a cache system with simple actions and to store it in files
  * The files path is created with env-entry parameters
  *      cache-path, the absolute path to cache files
