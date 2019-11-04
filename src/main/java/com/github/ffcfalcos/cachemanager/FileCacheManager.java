@@ -1,8 +1,5 @@
 package com.github.ffcfalcos.cachemanager;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Default;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -11,16 +8,14 @@ import java.io.*;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.1
+ * @version 1.0.5
  * This class permit to manage a cache system with simple actions and to store it in files
  * The files path is created with env-entry parameters
  *      cache-path, the absolute path to cache files
  * All rules are executed in the CacheManager and with the CacheValidationSystem if used
  */
-@Default
-@ApplicationScoped
 @SuppressWarnings("ResultOfMethodCallIgnored")
-class FileCacheManager extends AbstractCacheManager {
+class FileCacheManager implements CacheSystemInterface {
 
     /**
      * File Cache directory
@@ -28,10 +23,10 @@ class FileCacheManager extends AbstractCacheManager {
     private String directory;
 
     /**
+     * FileCacheManager Constructor
      * Load the env-entry parameters to define cache file directory
      */
-    @PostConstruct
-    public void init() {
+    FileCacheManager() {
         try {
             Context env = (Context)new InitialContext().lookup("java:comp/env");
             directory = (String) env.lookup("cache-path");

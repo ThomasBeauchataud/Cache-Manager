@@ -3,7 +3,6 @@ package com.github.ffcfalcos.cachemanager;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
-import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.1
+ * @version 1.0.5
  * This class if the manager of the component
  * It permit to manage cache with different storage system and different validation system
  * If you are using default system, please watch their description if they need some parameters to be initialized
@@ -20,24 +19,21 @@ import java.util.List;
 @ApplicationScoped
 class CacheManager implements CacheManagerInterface {
 
-    @Inject
-    private RedisCacheManager redisCacheManager;
-    @Inject
-    private FileCacheManager fileCacheManager;
-    @Inject
-    private DefaultCacheValidation defaultCacheValidation;
-
     private List<CacheSystemInterface> cacheSystems = new ArrayList<>();
     private List<CacheValidationInterface> cacheValidations = new ArrayList<>();
     private List<Association> associations = new ArrayList<>();
+    private CacheSystemInterface defaultCacheSystem;
+    private CacheValidationInterface defaultCacheValidation;
 
     /**
      * Initialize the CacheManager by adding default systems in the system list
      */
     @PostConstruct
     public void init() {
-        cacheSystems.add(redisCacheManager);
-        cacheSystems.add(fileCacheManager);
+        defaultCacheSystem = new RedisCacheManager();
+        cacheSystems.add(defaultCacheSystem);
+        cacheSystems.add(new FileCacheManager());
+        defaultCacheValidation = new DefaultCacheValidation();
         cacheValidations.add(defaultCacheValidation);
     }
 
@@ -131,9 +127,9 @@ class CacheManager implements CacheManagerInterface {
      */
     @Override
     public void add(String key, Serializable object) {
-        fileCacheManager.add(key, object);
-        fileCacheManager.add("meta" + key, "empty-meta");
-        associations.add(new Association(fileCacheManager.getClass().getName(), key, defaultCacheValidation.getClass().getName()));
+        defaultCacheSystem.add(key, object);
+        defaultCacheSystem.add("meta" + key, "empty-meta");
+        associations.add(new Association(defaultCacheSystem.getClass().getName(), key, defaultCacheValidation.getClass().getName()));
     }
 
     /**
@@ -144,9 +140,9 @@ class CacheManager implements CacheManagerInterface {
      */
     @Override
     public void add(String key, Serializable object, Serializable meta) {
-        fileCacheManager.add(key, object);
-        fileCacheManager.add("meta" + key, meta);
-        associations.add(new Association(fileCacheManager.getClass().getName(), key, defaultCacheValidation.getClass().getName()));
+        defaultCacheSystem.add(key, object);
+        defaultCacheSystem.add("meta" + key, meta);
+        associations.add(new Association(defaultCacheSystem.getClass().getName(), key, defaultCacheValidation.getClass().getName()));
     }
 
     /**
@@ -198,7 +194,7 @@ class CacheManager implements CacheManagerInterface {
                 return cacheSystem;
             }
         }
-        return fileCacheManager;
+        return defaultCacheSystem;
     }
 
     /**

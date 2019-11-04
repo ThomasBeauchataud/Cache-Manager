@@ -3,7 +3,7 @@ package com.github.ffcfalcos.cachemanager;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.1
+ * @version 1.0.5
  * Simple entity to stored how and where each key is stored
  */
 class Association {

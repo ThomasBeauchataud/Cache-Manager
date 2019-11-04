@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.1
+ * @version 1.0.5
  * This class permit to manage a cache system with simple actions
  * All rules are executed in the CacheManager and with the CacheValidationSystem if used
  */

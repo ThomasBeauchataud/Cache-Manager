@@ -3,19 +3,15 @@ package com.github.ffcfalcos.cachemanager;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Default;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.1
+ * @version 1.0.5
  * This class permit to validate a content stored in cache with his meta data
  */
-@Default
-@ApplicationScoped
 class DefaultCacheValidation implements CacheValidationInterface {
 
     /**

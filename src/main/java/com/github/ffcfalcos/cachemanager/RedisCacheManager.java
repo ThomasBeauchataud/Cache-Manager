@@ -2,17 +2,15 @@ package com.github.ffcfalcos.cachemanager;
 
 import redis.clients.jedis.Jedis;
 
-import javax.enterprise.context.ApplicationScoped;
 import java.io.Serializable;
 
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.1
+ * @version 1.0.5
  * This class permit to manage a cache system with simple actions and to store it in a Redis server
  * All rules are executed in the CacheManager and with the CacheValidationSystem if used
  */
-@ApplicationScoped
 class RedisCacheManager extends AbstractCacheManager {
 
     /**

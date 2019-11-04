@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.1
+ * @version 1.0.5
  * This abstract class allow CacheSystem to use serialize and unSerialize methods
  */
 @SuppressWarnings("WeakerAccess")
