@@ -2,6 +2,7 @@ package com.github.ffcfalcos.cachemanager;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -16,6 +17,7 @@ import java.io.*;
  *      cache-path, the absolute path to cache files
  * All rules are executed in the CacheManager and with the CacheValidationSystem if used
  */
+@Default
 @ApplicationScoped
 @SuppressWarnings("ResultOfMethodCallIgnored")
 class FileCacheManager extends AbstractCacheManager {
