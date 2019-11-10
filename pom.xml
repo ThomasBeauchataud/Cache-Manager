@@ -6,11 +6,11 @@
 
     <groupId>com.github.ffcfalcos</groupId>
     <artifactId>cache-manager</artifactId>
-    <version>1.0.5</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <name>Cache Manager</name>
     <description>Cache Manager is a small component to manage cache with different storage system and different validation systems</description>
-    <url>https://github.com/ffcfalcos/cachemanager</url>
+    <url>https://github.com/ffcfalcos/Cache-Manager</url>
 
     <licenses>
         <license>
@@ -25,24 +25,34 @@
             <name>Thomas Beauchataud</name>
             <email>thomas.lcdv@yahoo.fr</email>
             <organization>com.github.ffcfalcos</organization>
-            <organizationUrl>https://github.com/ffcfalcos/cachemanager</organizationUrl>
+            <organizationUrl>https://github.com/ffcfalcos/Cache-Manager</organizationUrl>
         </developer>
     </developers>
 
-    <scm>
-        <connection>scm:git:git://github.com/ffcfalcos/cachemanager.git</connection>
-        <developerConnection>scm:git:ssh://github.com:ffcfalcos/cachemanager.git</developerConnection>
-        <url>https://github.com/ffcfalcos/commondao</url>
-    </scm>
+    <profiles>
+        <profile>
+            <id>github</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/OWNER</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>github</id>
+            <name>GitHub ffcfalcos Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/ffcfalcos/Cache-Manager</url>
         </repository>
     </distributionManagement>
 
@@ -98,17 +108,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
@@ -123,10 +122,9 @@
             <version>2.10.2</version>
         </dependency>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>8.0.1</version>
-            <scope>provided</scope>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>

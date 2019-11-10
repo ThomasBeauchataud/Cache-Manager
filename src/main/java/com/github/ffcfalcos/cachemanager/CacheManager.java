@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.5
+ * @version 1.0.7
  * This class if the manager of the component
  * It permit to manage cache with different storage system and different validation system
  * If you are using default system, please watch their description if they need some parameters to be initialized
@@ -30,9 +30,9 @@ class CacheManager implements CacheManagerInterface {
      */
     @PostConstruct
     public void init() {
-        defaultCacheSystem = new RedisCacheManager();
+        defaultCacheSystem = new FileCacheManager();
         cacheSystems.add(defaultCacheSystem);
-        cacheSystems.add(new FileCacheManager());
+        cacheSystems.add(new RedisCacheManager());
         defaultCacheValidation = new DefaultCacheValidation();
         cacheValidations.add(defaultCacheValidation);
     }
