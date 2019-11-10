@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.7
+ * @version 3.0.0
  * This class if the manager of the component
  * It permit to manage cache with different storage system and different validation system
  * If you are using default system, please watch their description if they need some parameters to be initialized

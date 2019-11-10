@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.7
+ * @version 3.0.0
  * This class permit to validate a content stored in cache with his meta data
  */
 class DefaultCacheValidation implements CacheValidationInterface {

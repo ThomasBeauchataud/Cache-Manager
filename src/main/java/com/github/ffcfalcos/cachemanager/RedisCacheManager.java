@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * @author Thomas Beauchataud
  * @since 03.11.2019
- * @version 1.0.7
+ * @version 3.0.0
  * This class permit to manage a cache system with simple actions and to store it in a Redis server
  * All rules are executed in the CacheManager and with the CacheValidationSystem if used
  */
