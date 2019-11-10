@@ -1,3 +1,5 @@
+!include <aws/Storage/AmazonS3/AmazonS3>
+
 # Cache-Manager
 ### uml: class diagram
 ```plantuml
