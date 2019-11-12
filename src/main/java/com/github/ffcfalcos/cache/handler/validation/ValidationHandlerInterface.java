@@ -1,4 +1,4 @@
-package com.github.ffcfalcos.cachemanager;
+package com.github.ffcfalcos.cache.handler.validation;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @version 3.0.0
  * This class permit to validate a content stored in cache with his meta data
  */
-public interface CacheValidationInterface {
+public interface ValidationHandlerInterface {
 
     /**
      * Validate or not the a content stored in cache with his meta data

@@ -1,10 +1,8 @@
-package com.github.ffcfalcos.cachemanager;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+package com.github.ffcfalcos.cache.handler.validation;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Thomas Beauchataud
@@ -12,7 +10,8 @@ import java.util.Date;
  * @version 3.0.0
  * This class permit to validate a content stored in cache with his meta data
  */
-class DefaultCacheValidation implements CacheValidationInterface {
+@SuppressWarnings("unchecked")
+public class DefaultValidationHandler implements ValidationHandlerInterface {
 
     /**
      * Validate or not the a content stored in cache with his meta data
@@ -25,8 +24,8 @@ class DefaultCacheValidation implements CacheValidationInterface {
     @Override
     public boolean validate(Serializable meta) {
         try {
-            JSONObject jsonObject = (JSONObject) new JSONParser().parse((String)meta);
-            return (long) jsonObject.get("expire") >= new Date().getTime();
+            Map<String, Object> metaContent = (Map<String, Object>) meta;
+            return (long) metaContent.get("expire") >= new Date().getTime();
         } catch (Exception e) {
             return true;
         }
